@@ -188,36 +188,45 @@
     </div>
 
     <script>
-        async function translateContent() {
-            const aboutText = document.getElementById('about-text');
-            const experienceText = document.getElementById('experience-text');
-            const translateBtn = document.getElementById('translate-btn');
-            translateBtn.disabled = true;
-
-            try {
-                const responseAbout = await fetch(`https://api.botcahx.eu.org/translate?text=${encodeURIComponent(aboutText.textContent)}&lang=id`);
-                const responseExperience = await fetch(`https://api.botcahx.eu.org/translate?text=${encodeURIComponent(experienceText.textContent)}&lang=id`);
-
-                if (!responseAbout.ok || !responseExperience.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const dataAbout = await responseAbout.json();
-                const dataExperience = await responseExperience.json();
-
-                aboutText.innerHTML = dataAbout.result;
-                experienceText.innerHTML = dataExperience.result;
-
-            } catch (error) {
-                console.error('Error fetching translation:', error);
-            } finally {
-                translateBtn.disabled = false;
-            }
-        }
-
         function toggleContact() {
             const contactInfo = document.getElementById('contact-info');
             contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function translateContent() {
+            const textsToTranslate = [
+                document.getElementById('about-text').innerText,
+                document.getElementById('experience-text').innerText,
+                "Developed user-friendly websites and web apps, working closely with the design team to ensure high-quality UI/UX.", // Freelance experience text
+                "Muhammad Ikhsan Nurfadilah",
+                "Newbie Front-End Developer | Coders | Creative Solving"
+            ];
+
+            const translatedTexts = await Promise.all(textsToTranslate.map(text => translateText(text)));
+
+            // Update the content with translated texts
+            document.getElementById('about-text').innerText = translatedTexts[0];
+            document.getElementById('experience-text').innerText = translatedTexts[1];
+            // Update freelance experience text (assuming it is the third in the array)
+            document.querySelector('.experience .job:nth-child(2) p').innerText = translatedTexts[2];
+            document.querySelector('.intro h1').innerText = translatedTexts[3];
+            document.querySelector('.intro p').innerText = translatedTexts[4];
+        }
+
+        async function translateText(text) {
+            const response = await fetch('https://api.botcahx.eu.org/translate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: text,
+                    target: 'id' // Change the target language as needed (e.g., 'id' for Indonesian)
+                })
+            });
+
+            const data = await response.json();
+            return data.result; // Assuming the translated text is in 'result'
         }
     </script>
 </body>
