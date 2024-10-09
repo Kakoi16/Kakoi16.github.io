@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,10 +33,6 @@
             border-bottom: 2px solid #eee;
             padding-bottom: 20px;
             margin-bottom: 20px;
-        }
-
-        .photo {
-            background-size: cover;
         }
 
         .photo img {
@@ -87,14 +82,12 @@
             padding-bottom: 5px;
         }
 
-        p,
-        ul {
+        p, ul {
             font-size: 1rem;
             color: #555;
         }
 
-        .job,
-        .school {
+        .job, .school {
             margin-bottom: 15px;
         }
 
@@ -123,7 +116,6 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="container">
@@ -139,31 +131,31 @@
                     <p>Email: allancechain@example.com</p>
                     <p>Phone: +62 851 5605 2392</p>
                 </div>
-                <button id="translate-btn" onclick="translateContent()">Translate</button>
+                <button onclick="translateText()">Translate</button>
             </div>
         </header>
 
         <section class="about">
-            <h2>About Me</h2>
+            <h2 id="about">About Me</h2>
             <p id="about-text">As a newbie front-end developer, I realize that every challenge in web development is an opportunity to apply creative solving; by thinking outside the box and experimenting, I can create innovative solutions that make my web applications more engaging and functional.</p>
         </section>
 
         <section class="experience">
-            <h2>Experience</h2>
+            <h2 id="experience">Experience</h2>
             <div class="job">
-                <h3>Designer</h3>
+                <h3 id="designer">Designer</h3>
                 <h4>Pixels Store 2022 - 2023</h4>
                 <p id="experience-text">My experience in the world of editing has taught me the importance of detail; every cut of an object and every word that is edited is a step towards a better work, where creativity and technique meet to create a captivating story.</p>
             </div>
             <div class="job">
                 <h3>Newbie Web Developer</h3>
                 <h4>Freelance | 2021 - 2023</h4>
-                <p>Developed user-friendly websites and web apps, working closely with the design team to ensure high-quality UI/UX.</p>
+                <p id="newbie-text">Developed user-friendly websites and web apps, working closely with the design team to ensure high-quality UI/UX.</p>
             </div>
         </section>
 
         <section class="skills">
-            <h2>Skills</h2>
+            <h2 id="skills">Skills</h2>
             <ul>
                 <li>HTML, CSS, JavaScript</li>
                 <li>React, Vite, Angular</li>
@@ -175,7 +167,7 @@
         </section>
 
         <section class="education">
-            <h2>Education</h2>
+            <h2 id="education">Education</h2>
             <div class="school">
                 <h3>SDN Cikampek Barat 3</h3>
                 <h4>2011 - 2017</h4>
@@ -188,31 +180,47 @@
     </div>
 
     <script>
+        let isTranslated = false; // Track translation state
+
         function toggleContact() {
             const contactInfo = document.getElementById('contact-info');
             contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
         }
 
-        async function translateContent() {
-            const aboutText = document.getElementById('about-text').innerText;
-            const experienceText = document.getElementById('experience-text').innerText;
-            const lang = 'id'; // Target language for translation
+        function translateText() {
+            const aboutText = document.getElementById('about-text');
+            const experienceText = document.getElementById('experience-text');
+            const newbieText = document.getElementById('newbie-text');
+            const education = document.getElementById('education');
+            const skills = document.getElementById('skills');
+            const experience = document.getElementById('experience');
+            const about = document.getElementById('about');
+            const designer = document.getElementById('designer');
 
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // CORS proxy
-            const apiUrl = `https://api.botcahx.eu.org/translate?text=${encodeURIComponent(aboutText)}&lang=${lang}`;
-
-            try {
-                const response = await fetch(proxyUrl + apiUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                document.getElementById('about-text').innerText = data.result; // Update the about section
-            } catch (error) {
-                console.error('Error fetching translation:', error);
+            if (!isTranslated) {
+                // Translate to Indonesian
+                aboutText.innerHTML = "Sebagai seorang newbie front-end developer, saya menyadari bahwa setiap tantangan dalam pengembangan web adalah kesempatan untuk menerapkan creative solving; dengan berpikir di luar kotak dan bereksperimen, saya dapat menciptakan solusi inovatif yang membuat aplikasi web saya lebih menarik dan fungsional.";
+                experienceText.innerHTML = "Pengalaman saya di dunia editing telah mengajarkan saya pentingnya detail; setiap potongan objek dan setiap kata yang disunting adalah langkah menuju karya yang lebih baik, di mana kreativitas dan teknik bertemu untuk menciptakan cerita yang memukau.";
+                newbieText.innerHTML = "Mengembangkan situs web dan aplikasi web yang ramah pengguna, bekerja sama dengan tim desain untuk memastikan kualitas UI/UX yang tinggi.";
+                education.innerHTML = "Pendidikan.";
+                experience.innerHTML = "Pengalaman.";
+                skills.innerHTML = "Kemampuan.";
+                designer.innerHTML = "Desainer.";
+                about.innerHTML = "Tentang Saya.";
+            } else {
+                // Translate back to English
+                aboutText.innerHTML = "As a newbie front-end developer, I realize that every challenge in web development is an opportunity to apply creative solving; by thinking outside the box and experimenting, I can create innovative solutions that make my web applications more engaging and functional.";
+                experienceText.innerHTML = "My experience in the world of editing has taught me the importance of detail; every cut of an object and every word that is edited is a step towards a better work, where creativity and technique meet to create a captivating story.";
+                newbieText.innerHTML = "Developed user-friendly websites and web apps, working closely with the design team to ensure high-quality UI/UX.";
+                education.innerHTML = "Education.";
+                experience.innerHTML = "Experience.";
+                skills.innerHTML = "Skills.";
+                designer.innerHTML = "Designer.";
+                about.innerHTML = "About Me.";
             }
+
+            isTranslated = !isTranslated; // Toggle the state
         }
     </script>
 </body>
-
 </html>
