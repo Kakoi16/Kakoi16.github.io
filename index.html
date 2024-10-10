@@ -29,6 +29,7 @@
 
         .header {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             border-bottom: 2px solid #eee;
             padding-bottom: 20px;
@@ -113,6 +114,89 @@
             padding: 10px 15px;
             border-radius: 5px;
             font-size: 1rem;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .photo img {
+                width: 120px;
+                margin-bottom: 15px;
+            }
+
+            .intro h1 {
+                font-size: 2rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            p, ul {
+                font-size: 0.9rem;
+            }
+
+            .skills li {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photo img {
+                width: 100px;
+            }
+
+            .intro h1 {
+                font-size: 1.8rem;
+            }
+
+            .intro p {
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            p, ul {
+                font-size: 0.8rem;
+            }
+
+            .skills li {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
         }
     </style>
 </head>
@@ -200,26 +284,26 @@
             if (!isTranslated) {
                 // Translate to Indonesian
                 aboutText.innerHTML = "Sebagai seorang newbie front-end developer, saya menyadari bahwa setiap tantangan dalam pengembangan web adalah kesempatan untuk menerapkan creative solving; dengan berpikir di luar kotak dan bereksperimen, saya dapat menciptakan solusi inovatif yang membuat aplikasi web saya lebih menarik dan fungsional.";
-                experienceText.innerHTML = "Pengalaman saya di dunia editing telah mengajarkan saya pentingnya detail; setiap potongan objek dan setiap kata yang disunting adalah langkah menuju karya yang lebih baik, di mana kreativitas dan teknik bertemu untuk menciptakan cerita yang memukau.";
-                newbieText.innerHTML = "Mengembangkan situs web dan aplikasi web yang ramah pengguna, bekerja sama dengan tim desain untuk memastikan kualitas UI/UX yang tinggi.";
-                education.innerHTML = "Pendidikan.";
-                experience.innerHTML = "Pengalaman.";
-                skills.innerHTML = "Kemampuan.";
-                designer.innerHTML = "Desainer.";
-                about.innerHTML = "Tentang Saya.";
+                experienceText.innerHTML = "Pengalaman saya di dunia editing telah mengajarkan pentingnya detail; setiap potongan objek dan setiap kata yang diedit adalah langkah menuju karya yang lebih baik, di mana kreativitas dan teknik bertemu untuk menciptakan cerita yang memukau.";
+                newbieText.innerHTML = "Mengembangkan website dan aplikasi web yang ramah pengguna, bekerja sama dengan tim desain untuk memastikan kualitas UI/UX yang tinggi.";
+                education.innerHTML = "Pendidikan";
+                skills.innerHTML = "Keahlian";
+                experience.innerHTML = "Pengalaman";
+                about.innerHTML = "Tentang Saya";
+                designer.innerHTML = "Desainer";
+                isTranslated = true;
             } else {
                 // Translate back to English
                 aboutText.innerHTML = "As a newbie front-end developer, I realize that every challenge in web development is an opportunity to apply creative solving; by thinking outside the box and experimenting, I can create innovative solutions that make my web applications more engaging and functional.";
                 experienceText.innerHTML = "My experience in the world of editing has taught me the importance of detail; every cut of an object and every word that is edited is a step towards a better work, where creativity and technique meet to create a captivating story.";
                 newbieText.innerHTML = "Developed user-friendly websites and web apps, working closely with the design team to ensure high-quality UI/UX.";
-                education.innerHTML = "Education.";
-                experience.innerHTML = "Experience.";
-                skills.innerHTML = "Skills.";
-                designer.innerHTML = "Designer.";
-                about.innerHTML = "About Me.";
+                education.innerHTML = "Education";
+                skills.innerHTML = "Skills";
+                experience.innerHTML = "Experience";
+                about.innerHTML = "About Me";
+                designer.innerHTML = "Designer";
+                isTranslated = false;
             }
-
-            isTranslated = !isTranslated; // Toggle the state
         }
     </script>
 </body>
